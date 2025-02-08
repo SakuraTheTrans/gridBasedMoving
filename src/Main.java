@@ -7,20 +7,20 @@ public class Main {
 
     // Update  was trying to find the size of the object, realized I don't need to :3
     static Scanner input = new Scanner(System.in);// Length,Height
-    static String[][] testGrid = {{" "," "," "," "},  // Row 1
-                                  {"X"," "," "," "},  // Row 2
-                                  {" ","X"," "," "}}; // Row 3
+    static char[][] testGrid = {{' ',' ',' '},  // Row 1
+                                {'#',' ',' '},  // Row 2
+                                {' ','#',' '}}; // Row 3
     // Realizing I need a lot of variables
+    // Realizing I didn't need a lot of variables
 
 
-
-    static void moveUp(String[][] array){
+    static void moveUp(char[][] array){
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                if(array[i][j].equalsIgnoreCase("x")){
+                if(array[i][j] == ('#')){
                     if (i != 0){
-                        array[i][j] = " ";
-                        array[i-1][j] = "X";
+                        array[i][j] = ' ';
+                        array[i-1][j] = '#';
                     } else {
                         System.out.println("Cannot Move Down");
                         return;
@@ -32,7 +32,7 @@ public class Main {
 
 
 
-    static void moveDown(String[][] array){
+    static void moveDown(char[][] array){
         // So I've encountered an issue at this point where the moveUp function goes from top to bottom which
         // works BUT if I try to use the same code for move down it'll overwrite some of the values
         // Example :
@@ -53,10 +53,10 @@ public class Main {
             // It is at this moment I realize I have to do a flipped grid of pain and suffering
             for (int j = 0; j < array[i].length; j++) {
 
-                if(array[i][j].equalsIgnoreCase("x")){
+                if(array[i][j] == ('#')){
                     if (i != array.length - 1){
-                        array[i][j] = " ";
-                        array[i+1][j] = "X";
+                        array[i][j] = ' ';
+                        array[i+1][j] = '#';
                     } else {
                         System.out.println("Cannot Move Down");
                         return;
@@ -69,9 +69,9 @@ public class Main {
 
 
     // Trying to move left is proving...difficult
-    static void moveLeft(String[][] array){
+    static void moveLeft(char[][] array){
 
-        String[][] original = new String[array.length][array[0].length];
+        char[][] original = new char[array.length][array[0].length];
         for (int i = 0; i < array.length; i++) {
             System.arraycopy(array[i], 0, original[i], 0, array[i].length);
         }
@@ -79,10 +79,10 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             // It is at this moment I realize I have to do a flipped grid of pain and suffering
             for (int j = 0; j < array[i].length; j++) {
-                if(array[i][j].equalsIgnoreCase("x")){
+                if(array[i][j] == ('#')){
                     if (j != 0){
-                        array[i][j] = " ";
-                        array[i][j-1] = "X";
+                        array[i][j] = ' ';
+                        array[i][j-1] = '#';
                     } else {
                         System.out.println("Cannot Move Left");
                         for (int t = 0; t < array.length; t++) {
@@ -96,20 +96,19 @@ public class Main {
     }
 
 
+    static void moveRight(char[][] array){
 
-    static void moveRight(String[][] array){
-
-        String[][] original = new String[array.length][array[0].length];
+        char[][] original = new char[array.length][array[0].length];
         for (int i = 0; i < array.length; i++) {
             System.arraycopy(array[i], 0, original[i], 0, array[i].length);
         }
 
         for (int i = 0; i < array.length; i++) {
             for (int j = array[i].length - 1; j >= 0; j--) {
-                if(array[i][j].equalsIgnoreCase("x")){
+                if(array[i][j] == ('#')){
                     if (j != array[i].length - 1){
-                        array[i][j] = " ";
-                        array[i][j+1] = "X";
+                        array[i][j] = ' ';
+                        array[i][j+1] = '#';
                     } else {
                         System.out.println("Cannot Move Right");
                         for (int t = 0; t < array.length; t++) {
@@ -130,7 +129,7 @@ public class Main {
 
             System.out.println("Which way do you want to move? (Up, Down, Left, Right). To exit the program just say 'Exit'\nCurrent Grid : ");
 
-            for (String[] strings : testGrid) {
+            for (char[] strings : testGrid) {
                 System.out.println(Arrays.toString(strings));
             }
 
